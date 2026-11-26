@@ -1,0 +1,9 @@
+.env
+.env.*
+node_modules/
+.edge-qa-*
+.reference-reels/
+*.png
+!assets/*.png
+.DS_Store
+Thumbs.db

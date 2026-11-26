@@ -1,0 +1,6 @@
+# Project-level Codex configuration
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+# Keep project changes inside the workspace by default.
