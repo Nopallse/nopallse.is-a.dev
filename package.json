@@ -5,6 +5,7 @@
   "description": "A dependency-free editorial portfolio foundation.",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "push": "node scripts/push.js"
   }
 }

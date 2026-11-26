@@ -706,6 +706,9 @@ const mapSupabaseData = (payload) => {
 renderPortfolio(fallbackData);
 
 const toggle = document.querySelector('[data-menu-toggle]');
+const menuLabel = document.querySelector('[data-menu-label]');
+const menuSymbol = document.querySelector('[data-menu-symbol]');
+const wordmark = document.querySelector('[data-wordmark]');
 const navigation = document.querySelector('[data-navigation]');
 const header = document.querySelector('[data-header]');
 const themeToggle = document.querySelector('[data-theme-toggle]');
@@ -732,27 +735,36 @@ themeToggle.addEventListener('click', () => {
   if (typeof updateHeaderAppearance === 'function') updateHeaderAppearance();
 });
 
-const closeNavigation = ({ returnFocus = false } = {}) => {
-  toggle.setAttribute('aria-expanded', 'false');
-  navigation.classList.remove('is-open');
-  document.body.classList.remove('menu-is-open');
-  if (returnFocus) toggle.focus();
+const setMenuState = (open, { returnFocus = false } = {}) => {
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  if (menuLabel) menuLabel.textContent = open ? 'Close' : 'Menu';
+  if (menuSymbol) menuSymbol.textContent = open ? '×' : '+';
+  navigation.classList.toggle('is-open', open);
+  document.body.classList.toggle('menu-is-open', open);
+  if (!open && returnFocus) toggle.focus();
 };
+
+const closeNavigation = (options) => setMenuState(false, options);
 
 toggle.addEventListener('click', () => {
   const open = toggle.getAttribute('aria-expanded') === 'true';
-  if (open) {
-    closeNavigation();
-    return;
-  }
-  toggle.setAttribute('aria-expanded', 'true');
-  navigation.classList.add('is-open');
-  document.body.classList.add('menu-is-open');
+  setMenuState(!open);
+});
+
+wordmark?.addEventListener('click', () => {
+  if (toggle.getAttribute('aria-expanded') === 'true') closeNavigation();
 });
 
 navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
   closeNavigation();
 }));
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 760 && toggle.getAttribute('aria-expanded') === 'true') {
+    closeNavigation();
+  }
+}, { passive: true });
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
