@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nopallse.is-a.dev/sitemap.xml
+Sitemap: https://nopallse.vercel.app/sitemap.xml
