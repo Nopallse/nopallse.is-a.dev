@@ -9,6 +9,7 @@
     { "src": "cv_naufal.pdf", "use": "@vercel/static" },
     { "src": "robots.txt", "use": "@vercel/static" },
     { "src": "sitemap.xml", "use": "@vercel/static" },
+    { "src": "google19e5a21c230fdd3b.html", "use": "@vercel/static" },
     { "src": "assets/**", "use": "@vercel/static" }
   ],
   "routes": [
